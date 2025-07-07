@@ -32,7 +32,6 @@ export default async function handler(
     data: {
       email,
       name,
-      // Store the hashed password in the Accounts table
       accounts: {
         create: {
           type: "credentials",
