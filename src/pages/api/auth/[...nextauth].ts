@@ -1,11 +1,13 @@
-import NextAuth from "next-auth";
+import NextAuth, { SessionStrategy } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcrypt";
+import { Account } from "@prisma/client/wasm";
 
 const prisma = new PrismaClient();
 
-export default NextAuth({
+export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -15,19 +17,39 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // TODO: Implement proper password validation (hashing)
-        const user = await prisma.user.findUnique({
+        const userWithAccount = await prisma.user.findUnique({
           where: { email: credentials?.email },
+          include: { accounts: true },
         });
 
-        if (user) {
-          // You should hash and compare passwords here
-          return user;
+        if (
+          userWithAccount &&
+          userWithAccount.accounts.length > 0
+        ) {
+          const account = userWithAccount.accounts.find(
+            (acc: Account) => acc.provider === "credentials"
+          );
+
+          if (!account?.password) {
+            return null;
+          }
+
+          const isValid = await bcrypt.compare(
+            credentials!.password!,
+            account.password
+          );
+
+          if (isValid) {
+            return userWithAccount;
+          }
         }
+
         return null;
       },
     }),
   ],
-  session: { strategy: "jwt" },
+  session: { strategy: "jwt" as SessionStrategy},
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+export default NextAuth(authOptions);
