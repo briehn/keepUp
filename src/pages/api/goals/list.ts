@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 import { PrismaClient } from "@prisma/client";
+import { requireSession } from "@/lib/getSession";
+import { validateMethod } from "@/lib/validateMethod";
 
 const prisma = new PrismaClient();
 
@@ -9,15 +11,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getServerSession(req, res, authOptions);
-
-  if (!session) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  if (req.method !== "GET") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
+  if (!validateMethod(req, res, ["GET"])) return;
+  const session = await requireSession(req, res);
+  if (!session) return;
 
   const goals = await prisma.goal.findMany({
     where: {

@@ -15,22 +15,27 @@ export default async function handler(
   const session = await requireSession(req, res);
   if (!session) return;
 
-  const { title, description, frequency } = req.body;
+  const { goalId } = req.body;
 
-  if (!title || !frequency) {
-    return res
-      .status(400)
-      .json({ message: "Title and frequency are required." });
+  if (!goalId) {
+    return res.status(400).json({ message: "Goal ID is required." });
   }
 
-  const goal = await prisma.goal.create({
+  const goal = await prisma.goal.findUnique({
+    where: { id: goalId },
+    include: { user: true },
+  });
+
+  if (!goal || goal.user.email !== session.user!.email) {
+    return res.status(404).json({ message: "Goal not found." });
+  }
+
+  const progress = await prisma.progress.create({
     data: {
-      title,
-      description,
-      frequency,
-      user: { connect: { email: session.user!.email! } },
+      goalId: goal.id,
+      date: new Date(),
     },
   });
 
-  return res.status(201).json(goal);
+  return res.status(201).json(progress);
 }
