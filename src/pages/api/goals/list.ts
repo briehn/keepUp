@@ -1,11 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
-import { PrismaClient } from "@prisma/client";
 import { requireSession } from "@/lib/getSession";
 import { validateMethod } from "@/lib/validateMethod";
-
-const prisma = new PrismaClient();
+import { listGoals } from "@/services/goal";
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,12 +11,10 @@ export default async function handler(
   const session = await requireSession(req, res);
   if (!session) return;
 
-  const goals = await prisma.goal.findMany({
-    where: {
-      user: { email: session.user!.email! },
-    },
-    orderBy: { createdAt: "desc" },
-  });
-
-  return res.status(200).json(goals);
+  try {
+    const goals = await listGoals({ userEmail: session.user!.email! });
+    return res.status(200).json(goals)
+  } catch (err: any) {
+    return res.status(500).json({ message: err.message })
+  }
 }

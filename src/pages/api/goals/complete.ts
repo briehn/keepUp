@@ -1,11 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
-import { PrismaClient } from "@prisma/client";
 import { requireSession } from "@/lib/getSession";
 import { validateMethod } from "@/lib/validateMethod";
-
-const prisma = new PrismaClient();
+import { completeGoal } from "@/services/goal";
+import prisma from "@/lib/prisma";
 
 export default async function handler(
   req: NextApiRequest,
@@ -30,11 +27,9 @@ export default async function handler(
     return res.status(404).json({ message: "Goal not found." });
   }
 
-  const progress = await prisma.progress.create({
-    data: {
-      goalId: goal.id,
-      date: new Date(),
-    },
+  const progress = await completeGoal({
+    userEmail: session.user!.email!,
+    goalId,
   });
 
   return res.status(201).json(progress);

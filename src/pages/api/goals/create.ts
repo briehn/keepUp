@@ -1,11 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
-import { PrismaClient } from "@prisma/client";
 import { requireSession } from "@/lib/getSession";
 import { validateMethod } from "@/lib/validateMethod";
-
-const prisma = new PrismaClient();
+import { createGoal, NewGoalData } from "@/services/goal";
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,7 +11,7 @@ export default async function handler(
   const session = await requireSession(req, res);
   if (!session) return;
 
-  const { title, description, frequency } = req.body;
+  const { title, description, frequency } = req.body as NewGoalData;
 
   if (!title || !frequency) {
     return res
@@ -23,13 +19,9 @@ export default async function handler(
       .json({ message: "Title and frequency are required." });
   }
 
-  const goal = await prisma.goal.create({
-    data: {
-      title,
-      description,
-      frequency,
-      user: { connect: { email: session.user!.email! } },
-    },
+  const goal = await createGoal({
+    userEmail: session.user!.email!,
+    data: { title, description, frequency },
   });
 
   return res.status(201).json(goal);
