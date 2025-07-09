@@ -1,6 +1,7 @@
 // services/goal.ts
 import prisma from "../lib/prisma";
 
+
 export interface NewGoalData {
   title: string;
   description?: string;
@@ -49,4 +50,49 @@ export async function completeGoal({
   });
 }
 
-// add UpdateGoal and DeleteGoal
+
+export interface UpdateGoalArgs {
+  userEmail: string;
+  goalId: string;
+  data: {
+    title: string;
+    description?: string;
+    frequency: string; 
+  }
+}
+
+export async function updateGoal({ userEmail, goalId, data }: UpdateGoalArgs) {
+  const goal = await prisma.goal.findUnique({
+    where: { id: goalId },
+    include: { user: true }
+  });
+
+  if (!goal || goal.user.email !== userEmail) {
+    throw new Error("Unauthorized or goal not found");
+  }
+
+  return prisma.goal.update({
+    where: { id: goalId },
+    data,
+  });
+}
+
+export interface DeleteGoalArgs {
+  userEmail: string;
+  goalId: string;
+}
+
+export async function deleteGoal({ userEmail, goalId }: DeleteGoalArgs) {
+  const goal = await prisma.goal.findUnique({
+    where: { id: goalId },
+    include: { user: true }
+  });
+
+  if (!goal || goal.user.email !== userEmail) {
+    throw new Error("Unauthorized or goal not found");
+  }
+
+  return prisma.goal.delete({
+    where: { id: goalId },
+  });
+}
