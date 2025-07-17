@@ -2,7 +2,20 @@
 
 import { useState } from "react";
 
-export default function CreateGoalForm() {
+export type NewGoal = {
+  id: string;
+  title: string;
+  description: string | null;
+  frequency: string;
+  createdAt: string;
+  progress: { id: string; date: string }[];
+};
+
+interface Props {
+  onAdd?: (goal: NewGoal) => void;
+}
+
+export default function CreateGoalForm( { onAdd }: Props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [frequency, setFrequency] = useState("daily");
@@ -21,8 +34,11 @@ export default function CreateGoalForm() {
     });
 
     if (res.ok) {
-      // Refresh the page to show the new goal
-      window.location.reload();
+      const newGoal: NewGoal = await res.json();
+      onAdd?.(newGoal);
+      setTitle("");
+      setDescription("");
+      setFrequency("daily");
     } else {
       const data = await res.json();
       setError(data.message || "Something went wrong.");

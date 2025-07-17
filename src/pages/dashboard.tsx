@@ -1,33 +1,59 @@
 import { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
-import { PrismaClient } from "@prisma/client";
 import SignOutButton from "../components/SignOutButton";
 import { Goal } from "@prisma/client/wasm";
 import CreateGoalForm from "../components/CreateGoalForm";
+import EditGoalForm from "../components/EditGoalForm";
 import MarkCompleteButton from "@/components/MarkCompleteButton";
+import prisma from "@/lib/prisma";
+import { useState } from "react";
 
-const prisma = new PrismaClient();
+type GoalProgress = { id: string, date : string};
+type GoalType = {
+  id: string;
+  title: string;
+  description: string | null;
+  frequency: string;
+  createdAt: string;
+  progress: GoalProgress[];
+}
 
 type DashboardProps = {
   user: { email: string };
-  goals: {
-    id: string;
-    title: string;
-    description: string | null;
-    frequency: string;
-    createdAt: string;
-    progress: { id: string; date: string }[];
-  }[];
+  goals: GoalType[];
 };
 
 export default function Dashboard({ user, goals }: DashboardProps) {
+  const [goalList, setGoalList] = useState<GoalType[]>(goals);
+  const [editingId, setEditingId] = useState<string | null>(null);
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this goal?")) return;
+    const res = await fetch(`/api/goals/delete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ goalId: id }),
+    });
+    if (res.ok) {
+      setGoalList(goalList.filter((goal) => goal.id !== id));
+    } else {
+      alert("Failed to delete goal.");
+    }
+  };
+
+  const handleSave = (updatedGoal: GoalType) => {
+    setGoalList(goalList.map((goal) =>
+      goal.id === updatedGoal.id ? updatedGoal : goal));
+    setEditingId(null);
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-2">Dashboard</h1>
       <p className="mb-4">Welcome, {user.email}!</p>
       <SignOutButton />
-      <CreateGoalForm />
+      <CreateGoalForm onAdd={(goal) => setGoalList([goal, ...goalList])}/>
       <h2 className="text-xl font-semibold mt-6 mb-2">Your Goals</h2>
       {goals.length === 0 ? (
         <p>No goals yet.</p>
