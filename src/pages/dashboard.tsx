@@ -2,8 +2,7 @@ import { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import SignOutButton from "../components/SignOutButton";
-import { Goal } from "@prisma/client/wasm";
-import CreateGoalForm from "../components/CreateGoalForm";
+import CreateGoalForm, { NewGoal } from "../components/CreateGoalForm";
 import EditGoalForm from "../components/EditGoalForm";
 import MarkCompleteButton from "@/components/MarkCompleteButton";
 import prisma from "@/lib/prisma";
@@ -30,20 +29,30 @@ export default function Dashboard({ user, goals }: DashboardProps) {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this goal?")) return;
-    const res = await fetch(`/api/goals/delete`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ goalId: id }),
-    });
-    if (res.ok) {
-      setGoalList((prev) => prev.filter((g) => g.id !== id));
-    } else {
-      alert("Failed to delete goal.");
+    try {
+      const res = await fetch("/api/goals/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ goalId: id }),
+      });
+
+      if (res.ok) {
+        setGoalList((prev) => prev.filter((g) => g.id !== id));
+        if (editingId === id) setEditingId(null);
+      } else {
+        console.error("Failed to delete goal:", await res.text());
+        alert("Delete failed.");
+      }
+    } catch (error) {
+      console.error("Error deleting goal:", error);
+      alert("An error occurred while deleting the goal.");
     }
   };
 
   const handleSave = (updatedGoal: GoalType) => {
-    setGoalList((prev) => prev.map((g) => (g.id === updatedGoal.id ? updatedGoal : g)));
+    setGoalList((prev) =>
+      prev.map((g) => (g.id === updatedGoal.id ? updatedGoal : g))
+    );
     setEditingId(null);
   };
 
@@ -53,14 +62,14 @@ export default function Dashboard({ user, goals }: DashboardProps) {
       <p className="mb-4">Welcome, {user.email}!</p>
       <SignOutButton />
       <CreateGoalForm
-        onAdd={(goal) => setGoalList((prev) => [goal, ...prev])}
+        onAdd={(goal: NewGoal) => setGoalList((prev) => [goal, ...prev])}
       />
       <h2 className="text-xl font-semibold mt-6 mb-2">Your Goals</h2>
-      {goals.length === 0 ? (
+      {goalList.length === 0 ? (
         <p>No goals yet.</p>
       ) : (
         <ul className="space-y-2">
-          {goals.map((goal) => (
+          {goalList.map((goal) => (
             <li key={goal.id} className="border p-3 rounded">
               {editingId === goal.id ? (
                 <EditGoalForm
@@ -95,7 +104,7 @@ export default function Dashboard({ user, goals }: DashboardProps) {
                       Delete
                     </button>
                   </div>
-                  {goal.progress.length > 0 && (
+                  {goal.progress?.length > 0 && (
                     <div className="mt-2">
                       <h4 className="text-sm font-semibold">
                         Completion History:
