@@ -92,6 +92,10 @@ export async function deleteGoal({ userEmail, goalId }: DeleteGoalArgs) {
     throw new Error("Unauthorized or goal not found");
   }
 
+  await prisma.progress.deleteMany({
+    where: { goalId },
+  });
+
   return prisma.goal.delete({
     where: { id: goalId },
   });

@@ -11,14 +11,14 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-      <h1 className="text-4xl font-bold mb-6">Welcome to KeepUp</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-skyfoam">
+      <h1 className="text-4xl font-bold mb-6 text-midnightslate">Welcome to KeepUp</h1>
 
       {session ? (
         <>
-          <p className="mb-4">Hello, <strong>{session.user?.name || session.user?.email}</strong>!</p>
+          <p className="mb-4 text-midnightslate">Hello, <strong>{session.user?.name || session.user?.email}</strong>!</p>
           <div className="space-x-4">
-            <Link href="/dashboard" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            <Link href="/dashboard" className="px-4 py-2 bg-oakember text-midnightslate rounded-lg hover:bg-oakember-dark">
                 Go to Dashboard
             </Link>
             <button

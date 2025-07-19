@@ -9,7 +9,7 @@ import MarkCompleteButton from "@/components/MarkCompleteButton";
 import prisma from "@/lib/prisma";
 import { useState } from "react";
 
-type GoalProgress = { id: string, date : string};
+type GoalProgress = { id: string; date: string };
 type GoalType = {
   id: string;
   title: string;
@@ -17,7 +17,7 @@ type GoalType = {
   frequency: string;
   createdAt: string;
   progress: GoalProgress[];
-}
+};
 
 type DashboardProps = {
   user: { email: string };
@@ -36,15 +36,14 @@ export default function Dashboard({ user, goals }: DashboardProps) {
       body: JSON.stringify({ goalId: id }),
     });
     if (res.ok) {
-      setGoalList(goalList.filter((goal) => goal.id !== id));
+      setGoalList((prev) => prev.filter((g) => g.id !== id));
     } else {
       alert("Failed to delete goal.");
     }
   };
 
   const handleSave = (updatedGoal: GoalType) => {
-    setGoalList(goalList.map((goal) =>
-      goal.id === updatedGoal.id ? updatedGoal : goal));
+    setGoalList((prev) => prev.map((g) => (g.id === updatedGoal.id ? updatedGoal : g)));
     setEditingId(null);
   };
 
@@ -53,7 +52,9 @@ export default function Dashboard({ user, goals }: DashboardProps) {
       <h1 className="text-2xl font-bold mb-2">Dashboard</h1>
       <p className="mb-4">Welcome, {user.email}!</p>
       <SignOutButton />
-      <CreateGoalForm onAdd={(goal) => setGoalList([goal, ...goalList])}/>
+      <CreateGoalForm
+        onAdd={(goal) => setGoalList((prev) => [goal, ...prev])}
+      />
       <h2 className="text-xl font-semibold mt-6 mb-2">Your Goals</h2>
       {goals.length === 0 ? (
         <p>No goals yet.</p>
@@ -61,28 +62,54 @@ export default function Dashboard({ user, goals }: DashboardProps) {
         <ul className="space-y-2">
           {goals.map((goal) => (
             <li key={goal.id} className="border p-3 rounded">
-              <h3 className="font-semibold">{goal.title}</h3>
-              <p className="text-sm text-gray-600">
-                {goal.description ?? "No description"}
-              </p>
-              <p className="text-xs text-gray-500">
-                Frequency: {goal.frequency}
-              </p>
-              <p className="text-xs text-gray-400">
-                Created: {new Date(goal.createdAt).toLocaleDateString()}
-              </p>
-              <MarkCompleteButton goalId={goal.id} />
-              {goal.progress.length > 0 && (
-                <div className="mt-2">
-                  <h4 className="text-sm font-semibold">Completion History:</h4>
-                  <ul className="list-disc list-inside text-xs text-gray-500">
-                    {goal.progress.map((p) => (
-                      <li key={p.id}>
-                        {new Date(p.date).toLocaleDateString()}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {editingId === goal.id ? (
+                <EditGoalForm
+                  goal={goal}
+                  onCancel={() => setEditingId(null)}
+                  onSave={handleSave}
+                />
+              ) : (
+                <>
+                  <h3 className="font-semibold">{goal.title}</h3>
+                  <p className="text-sm text-gray-600">
+                    {goal.description ?? "No description"}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    Frequency: {goal.frequency}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    Created: {new Date(goal.createdAt).toLocaleDateString()}
+                  </p>
+                  <div className="flex space-x-2 mt-2">
+                    <MarkCompleteButton goalId={goal.id} />
+                    <button
+                      onClick={() => setEditingId(goal.id)}
+                      className="px-2 py-1 bg-yellow-500 text-white rounded"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(goal.id)}
+                      className="px-2 py-1 bg-red-600 text-white rounded"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  {goal.progress.length > 0 && (
+                    <div className="mt-2">
+                      <h4 className="text-sm font-semibold">
+                        Completion History:
+                      </h4>
+                      <ul className="list-disc list-inside text-xs text-gray-500">
+                        {goal.progress.map((p) => (
+                          <li key={p.id}>
+                            {new Date(p.date).toLocaleDateString()}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </>
               )}
             </li>
           ))}

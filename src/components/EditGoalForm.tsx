@@ -1,11 +1,20 @@
 // components/EditGoalForm.tsx
 import { useState } from "react";
-import type { Goal } from "@prisma/client";
+
+export type GoalProgress = { id: string; date: string }
+export type GoalType = {
+  id: string
+  title: string
+  description: string | null
+  frequency: string
+  createdAt: string
+  progress: GoalProgress[]
+}
 
 interface Props {
-  goal: Goal;
-  onCancel: () => void;
-  onSave: (updated: Goal) => void;
+  goal: GoalType
+  onCancel: () => void
+  onSave: (updated: GoalType) => void
 }
 
 export default function EditGoalForm({ goal, onCancel, onSave }: Props) {
@@ -29,7 +38,7 @@ export default function EditGoalForm({ goal, onCancel, onSave }: Props) {
         }),
       });
       if (!res.ok) throw new Error(await res.text());
-      const updated: Goal = await res.json();
+      const updated: GoalType = await res.json();
       onSave(updated);
     } catch (err) {
       console.error(err);

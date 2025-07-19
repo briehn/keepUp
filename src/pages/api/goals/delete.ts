@@ -24,6 +24,7 @@ export default async function handler(
     });
     return res.status(200).json({ success: true });
   } catch (err: any) {
+    console.error("Failed to delete goal:", err);
     return res.status(403).json({ message: err.message });
   }
 }
