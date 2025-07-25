@@ -8,6 +8,9 @@ import { Account } from "@prisma/client/wasm";
 const prisma = new PrismaClient();
 
 export const authOptions = {
+  pages: {
+    signIn: "/signin",
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({

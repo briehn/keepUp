@@ -1,27 +1,29 @@
-import { signIn } from "next-auth/react";
-import { useState } from "react";
-import { useRouter } from "next/router";
+// pages/signin.tsx
+import { signIn } from "next-auth/react"
+import { useState } from "react"
+import { useRouter } from "next/router"
+import Link from "next/link"
 
 export default function SignInPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     const result = await signIn("credentials", {
       redirect: false,
       email,
       password,
-    });
+    })
 
     if (result?.ok) {
-      router.push("/dashboard");
+      router.push("/dashboard")
     } else {
-      setError("Invalid email or password");
+      setError("Invalid email or password")
     }
-  };
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
@@ -53,7 +55,18 @@ export default function SignInPage() {
         >
           Sign In
         </button>
+
+        {/* Register Link */}
+        <p className="text-center text-sm text-gray-600">
+          Don’t have an account?{" "}
+          <Link
+            href="/signup"
+            className="text-blue-500 hover:underline"
+          >
+            Register
+          </Link>
+        </p>
       </form>
     </div>
-  );
+  )
 }

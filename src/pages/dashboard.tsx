@@ -7,6 +7,7 @@ import EditGoalForm from "../components/EditGoalForm";
 import MarkCompleteButton from "@/components/MarkCompleteButton";
 import prisma from "@/lib/prisma";
 import { useState } from "react";
+import Link from "next/link";
 
 type GoalProgress = { id: string; date: string };
 type GoalType = {
@@ -58,7 +59,11 @@ export default function Dashboard({ user, goals }: DashboardProps) {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-2">Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-2">
+        <Link href="/" className="hover:underline" >
+          Dashboard
+        </Link>
+      </h1>
       <p className="mb-4">Welcome, {user.email}!</p>
       <SignOutButton />
       <CreateGoalForm
