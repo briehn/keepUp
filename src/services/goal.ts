@@ -1,11 +1,16 @@
 // services/goal.ts
 import prisma from "../lib/prisma";
 
+export enum Visibility {
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE'
+}
 
 export interface NewGoalData {
   title: string;
   description?: string;
   frequency: string;
+  visibility?: Visibility;
 }
 
 export async function createGoal({
@@ -58,6 +63,7 @@ export interface UpdateGoalArgs {
     title: string;
     description?: string;
     frequency: string; 
+    visibility: Visibility;
   }
 }
 
