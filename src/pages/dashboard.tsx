@@ -8,6 +8,7 @@ import MarkCompleteButton from "@/components/MarkCompleteButton";
 import prisma from "@/lib/prisma";
 import { useState } from "react";
 import Link from "next/link";
+import { Visibility } from "@/services/goal";
 
 type GoalProgress = { id: string; date: string };
 type GoalType = {
@@ -15,6 +16,7 @@ type GoalType = {
   title: string;
   description: string | null;
   frequency: string;
+  visibility: Visibility;
   createdAt: string;
   progress: GoalProgress[];
 };
@@ -60,7 +62,7 @@ export default function Dashboard({ user, goals }: DashboardProps) {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-2">
-        <Link href="/" className="hover:underline" >
+        <Link href="/" className="hover:underline">
           Dashboard
         </Link>
       </h1>
@@ -90,6 +92,12 @@ export default function Dashboard({ user, goals }: DashboardProps) {
                   </p>
                   <p className="text-xs text-gray-500">
                     Frequency: {goal.frequency}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    Visibility:{" "}
+                    {goal.visibility === Visibility.PUBLIC
+                      ? "🌐 Public"
+                      : "🔒 Private"}
                   </p>
                   <p className="text-xs text-gray-400">
                     Created: {new Date(goal.createdAt).toLocaleDateString()}

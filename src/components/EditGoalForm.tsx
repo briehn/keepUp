@@ -1,26 +1,28 @@
-// components/EditGoalForm.tsx
 import { useState } from "react";
+import { Visibility } from "@/services/goal";
 
-export type GoalProgress = { id: string; date: string }
+export type GoalProgress = { id: string; date: string };
 export type GoalType = {
-  id: string
-  title: string
-  description: string | null
-  frequency: string
-  createdAt: string
-  progress: GoalProgress[]
-}
+  id: string;
+  title: string;
+  description: string | null;
+  frequency: string;
+  visibility: Visibility;
+  createdAt: string;
+  progress: GoalProgress[];
+};
 
 interface Props {
-  goal: GoalType
-  onCancel: () => void
-  onSave: (updated: GoalType) => void
+  goal: GoalType;
+  onCancel: () => void;
+  onSave: (updated: GoalType) => void;
 }
 
 export default function EditGoalForm({ goal, onCancel, onSave }: Props) {
   const [title, setTitle] = useState(goal.title);
   const [description, setDescription] = useState(goal.description ?? "");
   const [frequency, setFrequency] = useState(goal.frequency);
+  const [visibility, setVisibility] = useState<Visibility>(goal.visibility);
   const [isSaving, setIsSaving] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -35,6 +37,7 @@ export default function EditGoalForm({ goal, onCancel, onSave }: Props) {
           title,
           description,
           frequency,
+          visibility,
         }),
       });
       if (!res.ok) throw new Error(await res.text());
@@ -70,6 +73,14 @@ export default function EditGoalForm({ goal, onCancel, onSave }: Props) {
         <option value="daily">Daily</option>
         <option value="weekly">Weekly</option>
         <option value="monthly">Monthly</option>
+      </select>
+      <select
+        className="w-full p-2 border rounded"
+        value={visibility}
+        onChange={(e) => setVisibility(e.target.value as Visibility)}
+      >
+        <option value={Visibility.PUBLIC}>Public</option>
+        <option value={Visibility.PRIVATE}>Private</option>
       </select>
       <div className="flex justify-end space-x-2">
         <button

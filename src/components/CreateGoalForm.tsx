@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { Visibility } from "@/services/goal";
 
 export type NewGoal = {
   id: string;
   title: string;
   description: string | null;
   frequency: string;
+  visibility: Visibility;
   createdAt: string;
   progress: { id: string; date: string }[];
 };
@@ -15,10 +17,11 @@ interface Props {
   onAdd?: (goal: NewGoal) => void;
 }
 
-export default function CreateGoalForm( { onAdd }: Props) {
+export default function CreateGoalForm({ onAdd }: Props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [frequency, setFrequency] = useState("daily");
+  const [visibility, setVisibility] = useState<Visibility>(Visibility.PRIVATE);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -30,7 +33,7 @@ export default function CreateGoalForm( { onAdd }: Props) {
     const res = await fetch("/api/goals/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, description, frequency }),
+      body: JSON.stringify({ title, description, frequency, visibility }),
     });
 
     if (res.ok) {
@@ -39,6 +42,7 @@ export default function CreateGoalForm( { onAdd }: Props) {
       setTitle("");
       setDescription("");
       setFrequency("daily");
+      setVisibility(Visibility.PRIVATE);
     } else {
       const data = await res.json();
       setError(data.message || "Something went wrong.");
@@ -51,6 +55,7 @@ export default function CreateGoalForm( { onAdd }: Props) {
     <form onSubmit={handleSubmit} className="border p-4 rounded mb-6">
       <h2 className="text-lg font-semibold mb-2">Create a New Goal</h2>
       {error && <p className="text-red-500 mb-2">{error}</p>}
+
       <input
         type="text"
         placeholder="Title"
@@ -59,12 +64,14 @@ export default function CreateGoalForm( { onAdd }: Props) {
         className="border p-2 w-full mb-2"
         required
       />
+
       <textarea
         placeholder="Description (optional)"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         className="border p-2 w-full mb-2"
       />
+
       <select
         value={frequency}
         onChange={(e) => setFrequency(e.target.value)}
@@ -74,6 +81,16 @@ export default function CreateGoalForm( { onAdd }: Props) {
         <option value="weekly">Weekly</option>
         <option value="monthly">Monthly</option>
       </select>
+
+      <select
+        value={visibility}
+        onChange={(e) => setVisibility(e.target.value as Visibility)}
+        className="border p-2 w-full mb-4"
+      >
+        <option value={Visibility.PUBLIC}>Public</option>
+        <option value={Visibility.PRIVATE}>Private</option>
+      </select>
+
       <button
         type="submit"
         disabled={loading}

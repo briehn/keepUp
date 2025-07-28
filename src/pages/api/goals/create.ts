@@ -11,7 +11,7 @@ export default async function handler(
   const session = await requireSession(req, res);
   if (!session) return;
 
-  const { title, description, frequency } = req.body as NewGoalData;
+  const { title, description, frequency, visibility } = req.body as NewGoalData;
 
   if (!title || !frequency) {
     return res
@@ -21,7 +21,7 @@ export default async function handler(
 
   const goal = await createGoal({
     userEmail: session.user!.email!,
-    data: { title, description, frequency },
+    data: { title, description, frequency, visibility },
   });
 
   return res.status(201).json(goal);
