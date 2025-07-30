@@ -1,10 +1,8 @@
 // services/goal.ts
 import prisma from "../lib/prisma";
+import type { Visibility } from "@prisma/client";
 
-export enum Visibility {
-  PUBLIC = 'PUBLIC',
-  PRIVATE = 'PRIVATE'
-}
+export { Visibility } from "@prisma/client";
 
 export interface NewGoalData {
   title: string;

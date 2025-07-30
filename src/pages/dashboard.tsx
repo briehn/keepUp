@@ -61,7 +61,7 @@ export default function Dashboard({ user, goals }: DashboardProps) {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-2">
+      <h1 className="text-2xl font-bold mb-2 text-oakember">
         <Link href="/" className="hover:underline">
           Dashboard
         </Link>
