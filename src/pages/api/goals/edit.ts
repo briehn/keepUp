@@ -1,4 +1,3 @@
-// pages/api/goals/edit.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import { validateMethod } from "@/lib/validateMethod";
 import { requireSession } from "@/lib/getSession";

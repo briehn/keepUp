@@ -28,7 +28,20 @@ model User {
   sessions      Session[]
   goals         Goal[]
   achievements  Achievement[]
+  followers     Follower[]    @relation("UserFollowers")
+  following     Follower[]    @relation("UserFollowing")
   createdAt     DateTime  @default(now())
+}
+
+model Follower {
+  id            String   @id @default(cuid())
+  followerId    String
+  followingId   String
+  follower      User     @relation("UserFollowers", fields: [followerId], references: [id])
+  following     User     @relation("UserFollowing", fields: [followingId], references: [id])
+  createdAt     DateTime @default(now())
+
+  @@unique([followerId, followingId])
 }
 
 model Account {

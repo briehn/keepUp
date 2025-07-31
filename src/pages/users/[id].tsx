@@ -1,4 +1,3 @@
-// pages/users/[id].tsx
 import { GetServerSideProps, NextPage } from 'next'
 import prisma from '@/lib/prisma'
 import { Visibility } from '@/services/goal'
@@ -30,6 +29,7 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ profileUser, publicGoals }) =
           {profileUser.name ?? profileUser.email}
         </h1>
         <p className="text-gray-500">User ID: {profileUser.id}</p>
+        <p className="text-gray-500">User Name: {profileUser.name}</p>
       </header>
 
       <section>

@@ -1,4 +1,3 @@
-// services/goal.ts
 import prisma from "../lib/prisma";
 import type { Visibility } from "@prisma/client";
 

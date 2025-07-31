@@ -1,4 +1,3 @@
-// pages/index.tsx
 import { NextPage } from 'next'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import Link from 'next/link'

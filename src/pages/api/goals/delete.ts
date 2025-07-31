@@ -1,4 +1,3 @@
-// pages/api/goals/delete.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import { validateMethod } from "@/lib/validateMethod";
 import { requireSession } from "@/lib/getSession";
