@@ -1,4 +1,6 @@
-import NextAuth, { SessionStrategy } from "next-auth";
+import NextAuth, { SessionStrategy, NextAuthOptions, User } from "next-auth";
+import { Session } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -25,10 +27,7 @@ export const authOptions = {
           include: { accounts: true },
         });
 
-        if (
-          userWithAccount &&
-          userWithAccount.accounts.length > 0
-        ) {
+        if (userWithAccount && userWithAccount.accounts.length > 0) {
           const account = userWithAccount.accounts.find(
             (acc: Account) => acc.provider === "credentials"
           );
@@ -51,7 +50,28 @@ export const authOptions = {
       },
     }),
   ],
-  session: { strategy: "jwt" as SessionStrategy},
+  session: { strategy: "jwt" as SessionStrategy },
+  callbacks: {
+    async jwt({ token, user }: { token: JWT; user?: User }): Promise<JWT> {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+
+    async session({
+      session,
+      token,
+    }: {
+      session: Session;
+      token: JWT;
+    }): Promise<Session> {
+      if (session.user) {
+        session.user.id = token.id as string;
+      }
+      return session;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
 };
 

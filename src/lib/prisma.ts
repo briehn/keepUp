@@ -1,4 +1,3 @@
-// lib/prisma.ts
 import { PrismaClient } from '@prisma/client'
 
 // Augment the global type so we can store the client across reloads in dev

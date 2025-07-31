@@ -18,15 +18,6 @@ export default async function handler(
     return res.status(400).json({ message: "Goal ID is required." });
   }
 
-  // const goal = await prisma.goal.findUnique({
-  //   where: { id: goalId },
-  //   include: { user: true },
-  // });
-
-  // if (!goal || goal.user.email !== session.user!.email) {
-  //   return res.status(404).json({ message: "Goal not found." });
-  // }
-
   const progress = await completeGoal({
     userEmail: session.user!.email!,
     goalId,
