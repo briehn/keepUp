@@ -17,4 +17,6 @@ export default async function handler(
     }
 
     const following = await followUser(session.user!.id, followingId);
+
+    return res.status(201).json(following);
 }

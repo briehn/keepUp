@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { requireSession } from "@/lib/getSession";
 import { validateMethod } from "@/lib/validateMethod";
 import { completeGoal } from "@/services/goal";
-import prisma from "@/lib/prisma";
 
 export default async function handler(
   req: NextApiRequest,
