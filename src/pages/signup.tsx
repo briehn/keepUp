@@ -1,50 +1,55 @@
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import { GetServerSideProps, NextPage } from 'next'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from './api/auth/[...nextauth]'
+import { useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { GetServerSideProps, NextPage } from "next";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
+import { signIn } from "next-auth/react";
 
 const SignUp: NextPage = () => {
-  const router = useRouter()
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
+    e.preventDefault();
+    setError(null);
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match.')
-      return
+      setError("Passwords do not match.");
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
     try {
-      const res = await fetch('/api/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
-      })
-      const data = await res.json()
+      });
+      const data = await res.json();
       if (!res.ok) {
         // show the message your API returned (e.g. "User already exists")
-        setError(data.message || 'Something went wrong.')
+        setError(data.message || "Something went wrong.");
       } else {
-        // on success, send them to sign-in
-        router.push('/api/auth/signin')
+        await signIn("credentials", {
+          redirect: true,
+          email,
+          password,
+          callbackUrl: "/dashboard", // or wherever you want them to land
+        });
       }
     } catch (err) {
-      console.error(err)
-      setError('Network error. Please try again.')
+      console.error(err);
+      setError("Network error. Please try again.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-16 p-6 border rounded-lg shadow-sm">
@@ -111,27 +116,27 @@ const SignUp: NextPage = () => {
           disabled={loading}
           className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
-          {loading ? 'Signing up...' : 'Sign Up'}
+          {loading ? "Signing up..." : "Sign Up"}
         </button>
       </form>
       <p className="mt-4 text-center text-sm">
-        Already have an account?{' '}
+        Already have an account?{" "}
         <Link href="/api/auth/signin" className="text-blue-500 hover:underline">
           Sign in
         </Link>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getServerSession(ctx.req, ctx.res, authOptions)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions);
   if (session) {
     return {
-      redirect: { destination: '/dashboard', permanent: false },
-    }
+      redirect: { destination: "/dashboard", permanent: false },
+    };
   }
-  return { props: {} }
-}
+  return { props: {} };
+};
