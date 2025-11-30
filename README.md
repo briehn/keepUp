@@ -1,6 +1,6 @@
 # KeepUp
 
-**KeepUp** is a social habit-tracking and accountability app. Users can create goals, log daily progress, unlock achievements, and stay motivated with support from friends.
+**KeepUp** is a social habit-tracking and accountability webapp. Users can create goals, log daily progress, unlock achievements, and stay motivated with support from friends.
 
 ---
 
@@ -18,7 +18,7 @@
 
 ## 🚀 Tech Stack
 
-- **Frontend:** React + Next.js (Pages Router)
+- **Frontend:** React + Next.js
 - **Backend:** Next.js API Routes
 - **Database:** PostgreSQL with Prisma ORM
 - **Styling:** Tailwind CSS

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth/next";
 import { signIn } from "next-auth/react";
 import { authOptions } from "./api/auth/[...nextauth]";
+import { UserGroupIcon } from "@heroicons/react/24/solid";
 
 const SignUpPage: NextPage = () => {
   const [name, setName] = useState("");
@@ -12,6 +13,7 @@ const SignUpPage: NextPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [whyOpen, setWhyOpen] = useState(false);
@@ -63,9 +65,14 @@ const SignUpPage: NextPage = () => {
           <div className="flex flex-col justify-center">
             {/* Logo + title row */}
             <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                {/* Put your logo icon component here */}
-              </div>
+              <Link href="/" className="inline-flex">
+                <button
+                  type="button"
+                  className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 cursor-pointer hover:bg-primary hover:text-background-dark"
+                >
+                  <UserGroupIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+              </Link>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
                   KeepUp
@@ -114,7 +121,7 @@ const SignUpPage: NextPage = () => {
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
               <label className="block text-sm">
-                <span className="mb-1 block text-muted">Full name</span>
+                <span className="mb-1 block text-muted">Full Name</span>
                 <input
                   type="text"
                   name="name"
@@ -122,7 +129,7 @@ const SignUpPage: NextPage = () => {
                   onChange={(e) => setName(e.target.value)}
                   required
                   className="w-full rounded-lg border border-subtle bg-background-dark/40 px-3 py-2 text-sm text-slate-50 outline-none placeholder:text-muted focus:ring-2 focus:ring-primary"
-                  placeholder="Alex Johnson"
+                  placeholder="Brian Yu"
                 />
               </label>
 
@@ -157,7 +164,12 @@ const SignUpPage: NextPage = () => {
                       onClick={() => setShowPassword((v) => !v)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted"
                     >
-                      {/* eye icon here */}
+                      <span
+                        className="material-symbols-outlined text-[#9db8b4] password-toggle-icon"
+                        data-icon="visibility_off"
+                      >
+                        {showPassword ? "visibility" : "visibility_off"}
+                      </span>
                     </button>
                   </div>
                 </label>
@@ -166,15 +178,32 @@ const SignUpPage: NextPage = () => {
                   <span className="mb-1 block text-muted">
                     Confirm password
                   </span>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                    className="w-full rounded-lg border border-subtle bg-background-dark/40 px-3 py-2 text-sm text-slate-50 outline-none placeholder:text-muted focus:ring-2 focus:ring-primary"
-                    placeholder="••••••••"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      name="confirmPassword"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      className="w-full rounded-lg border border-subtle bg-background-dark/40 px-3 py-2 pr-10 text-sm text-slate-50 outline-none placeholder:text-muted focus:ring-2 focus:ring-primary"
+                      placeholder="••••••••"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword((v) => !v)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted cursor-pointer"
+                      aria-label={
+                        showConfirmPassword ? "Hide password" : "Show password"
+                      }
+                    >
+                      <span
+                        className="material-symbols-outlined text-[#9db8b4] password-toggle-icon"
+                        data-icon="visibility_off"
+                      >
+                        {showConfirmPassword ? "visibility" : "visibility_off"}
+                      </span>
+                    </button>
+                  </div>
                 </label>
               </div>
 
@@ -223,9 +252,9 @@ const SignUpPage: NextPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-2 flex h-10 w-full items-center justify-center rounded-lg bg-primary px-4 text-sm font-semibold text-slate-900 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+                className="cursor-pointer mt-2 flex h-10 w-full items-center justify-center rounded-lg bg-primary px-4 text-sm font-semibold text-slate-900 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                {loading ? "Creating account..." : "Create account"}
+                {loading ? "Creating account..." : "Create Account"}
               </button>
             </form>
 

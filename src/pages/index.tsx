@@ -1,6 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/react";
-import Head from "next/head";
 import { UserGroupIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
@@ -34,14 +33,6 @@ const FEATURES: Feature[] = [
 const HomePage: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>KeepUp – Build Habits That Stick</title>
-        <meta
-          name="description"
-          content="KeepUp is the social platform to track your habits, visualize progress, and stay motivated with a supportive community."
-        />
-      </Head>
-
       <main className="min-h-screen bg-background-light text-slate-900 dark:bg-background-dark dark:text-slate-50">
         {/* TopNavBar */}
         <header className="bg-background-dark/60">
