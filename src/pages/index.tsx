@@ -2,6 +2,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import { UserGroupIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 type Feature = {
   icon: string;
@@ -69,18 +70,19 @@ const HomePage: NextPage = () => {
               </div>
 
               <div className="flex gap-2">
-                <button
+                <Link
+                  href="/signup"
                   className="flex h-10 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold leading-normal tracking-[0.015em] text-black"
-                  type="button"
                 >
                   <span className="truncate">Sign Up</span>
-                </button>
-                <button
+                </Link>
+
+                <Link
+                  href="/signin"
                   className="flex h-10 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#293836] px-4 text-sm font-bold leading-normal tracking-[0.015em] text-white"
-                  type="button"
                 >
                   <span className="truncate">Log In</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -180,12 +182,12 @@ const HomePage: NextPage = () => {
               It&apos;s free to get started.
             </p>
             <div className="mt-6 flex justify-center">
-              <a
+              <Link
                 href="/signup"
                 className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-slate-900 shadow-sm transition hover:brightness-110"
               >
                 Create your free account
-              </a>
+              </Link>
             </div>
           </div>
         </section>
