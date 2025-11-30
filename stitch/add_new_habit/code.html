@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add New Habit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e8c9",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#11211e",
+                        "violet": "#8B5CF6",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col items-center bg-[#11211E] dark group/design-root overflow-x-hidden">
+<header class="sticky top-0 z-10 w-full border-b border-white/10 bg-[#11211E]/80 backdrop-blur-lg">
+<nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-4 sm:p-6 lg:px-8">
+<div class="flex items-center gap-4">
+<a class="flex items-center gap-2 text-primary font-bold text-lg" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span>Habitly</span>
+</a>
+</div>
+<div class="hidden lg:flex lg:gap-x-12">
+<a class="text-sm font-semibold leading-6 text-white hover:text-primary" href="#">Home</a>
+<a class="text-sm font-semibold leading-6 text-white hover:text-primary" href="#">Feed</a>
+<a class="text-sm font-semibold leading-6 text-white hover:text-primary" href="#">Progress</a>
+<a class="text-sm font-semibold leading-6 text-white hover:text-primary" href="#">Community</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white/80 transition-colors hover:bg-white/20 hover:text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white/10 text-white/80 transition-colors hover:bg-white/20 hover:text-white">
+<img alt="User avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq4zQHYJFlXUpjLkSY4VOO18vVBDG3siSvplfsCBiyin6lpHKq8fiTbhijTT_SUQupLkcdZJluDAjRIpvzWzOoNHLt6nDkoMGU0ohHl3MjUfS09ksgpejcNDxwgstC7hq8s6Q8sGZlq8REc58JN7ieLLr0CZWBA8wxzwxGwQnoI4G_7TRfwQufhoA8wUTKWp-DjXZpHDkf_0RujXQ_6AvECX0cQw5KVHN2s8foEuG6haDADJZKm3NqEF29XdT2T_S_C6cYvT99PI4L"/>
+</button>
+</div>
+</nav>
+</header>
+<div class="flex w-full flex-col items-center p-4 sm:p-6 md:p-8">
+<div class="layout-container flex h-full w-full max-w-2xl grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap px-6 sm:px-10 py-4">
+<div class="flex items-center gap-3 text-white">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white/10 text-white/80 transition-colors hover:bg-white/20 hover:text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Add New Habit</h2>
+</div>
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white/10 text-white/80 transition-colors hover:bg-white/20 hover:text-white">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<main class="flex flex-col flex-1 px-6 sm:px-10 py-8">
+<div class="flex flex-col gap-2 mb-8">
+<p class="text-white text-3xl sm:text-4xl font-black leading-tight tracking-[-0.033em]">Craft Your New Habit</p>
+<p class="text-white/60 text-base font-normal leading-normal">Let's set up a new positive routine. Be specific to make it stick!</p>
+</div>
+<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-6">
+<label class="flex flex-col w-full">
+<p class="text-white text-base font-medium leading-normal pb-2">What habit do you want to build?</p>
+<div class="flex w-full flex-1 items-stretch rounded-xl">
+<div class="flex h-14 w-14 items-center justify-center rounded-l-xl bg-[#1F2937]">
+<button class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-white/80 text-2xl">😊</button>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-xl text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-[#1F2937] h-14 placeholder:text-white/40 p-4 text-base font-normal leading-normal" placeholder="e.g., Read for 15 minutes" value=""/>
+</div>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-white text-base font-medium leading-normal pb-2">Add a description (optional)</p>
+<textarea class="form-textarea flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-[#1F2937] placeholder:text-white/40 p-4 text-base font-normal leading-normal" placeholder="Why is this habit important to you?" rows="3"></textarea>
+</label>
+</div>
+<div class="flex flex-col gap-6">
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Set a Goal</h2>
+<label class="flex items-center justify-between rounded-xl bg-[#1F2937] p-4 h-16">
+<p class="text-white font-medium">Goal Type</p>
+<div class="flex h-9 items-center justify-center rounded-lg bg-white/10 p-1 text-sm">
+<div class="flex cursor-pointer items-center justify-center rounded-md px-3 py-0.5 bg-primary/20 text-primary">Target</div>
+<div class="flex cursor-pointer items-center justify-center rounded-md px-3 py-0.5 text-white/60">Streak</div>
+</div>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-white text-base font-medium leading-normal pb-2">Target</p>
+<div class="relative flex w-full flex-1 items-stretch rounded-xl">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-l-xl text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-[#1F2937] h-14 placeholder:text-white/40 p-4 text-base font-normal leading-normal" placeholder="e.g., 30" type="number" value="30"/>
+<div class="flex items-center justify-center rounded-r-xl bg-[#1F2937] pr-4 text-white/60">
+<span>days</span>
+</div>
+</div>
+</label>
+</div>
+<div class="flex flex-col gap-6">
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">How often?</h2>
+<div class="flex">
+<div class="flex h-12 flex-1 items-center justify-center rounded-xl bg-[#1F2937] p-1.5">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 text-sm font-medium leading-normal text-white/60 has-[:checked]:bg-primary/20 has-[:checked]:text-primary transition-colors">
+<span class="truncate">Daily</span>
+<input checked="" class="invisible w-0" name="frequency" type="radio" value="Daily"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 text-sm font-medium leading-normal text-white/60 has-[:checked]:bg-primary/20 has-[:checked]:text-primary transition-colors">
+<span class="truncate">Weekly</span>
+<input class="invisible w-0" name="frequency" type="radio" value="Weekly"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 text-sm font-medium leading-normal text-white/60 has-[:checked]:bg-primary/20 has-[:checked]:text-primary transition-colors">
+<span class="truncate">Monthly</span>
+<input class="invisible w-0" name="frequency" type="radio" value="Monthly"/>
+</label>
+</div>
+</div>
+<label class="flex flex-col w-full">
+<p class="text-white text-base font-medium leading-normal pb-2">When do you want to start?</p>
+<div class="relative flex w-full flex-1 items-stretch rounded-xl">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-[#1F2937] h-14 placeholder:text-white/40 p-4 text-base font-normal leading-normal" placeholder="Select a date" type="date" value="2024-10-26"/>
+</div>
+</label>
+</div>
+<div class="flex flex-col gap-6">
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Settings</h2>
+<div class="flex items-center justify-between rounded-xl bg-[#1F2937] p-4 h-16">
+<p class="text-white font-medium">Set a Reminder</p>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-7 w-12 rounded-full bg-white/10 after:absolute after:start-[4px] after:top-[4px] after:h-5 after:w-5 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-focus:outline-none"></div>
+</label>
+</div>
+<label class="flex flex-col w-full">
+<p class="text-white text-base font-medium leading-normal pb-2">At what time?</p>
+<div class="relative flex w-full flex-1 items-stretch rounded-xl">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-[#1F2937] h-14 placeholder:text-white/40 p-4 text-base font-normal leading-normal" type="time" value="08:00 AM"/>
+</div>
+</label>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-3">
+<p class="text-white font-medium">Share your progress?</p>
+<div class="flex h-12 flex-1 items-center justify-center rounded-xl bg-[#1F2937] p-1.5">
+<label class="flex cursor-pointer h-full grow items-center justify-center gap-2 overflow-hidden rounded-lg px-2 text-sm font-medium leading-normal text-white/60 has-[:checked]:bg-violet/20 has-[:checked]:text-violet transition-colors">
+<span class="material-symbols-outlined text-base">public</span> <span class="truncate">Public</span>
+<input checked="" class="invisible w-0" name="privacy" type="radio" value="Public"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center gap-2 overflow-hidden rounded-lg px-2 text-sm font-medium leading-normal text-white/60 has-[:checked]:bg-violet/20 has-[:checked]:text-violet transition-colors">
+<span class="material-symbols-outlined text-base">group</span> <span class="truncate">Friends</span>
+<input class="invisible w-0" name="privacy" type="radio" value="Friends"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center gap-2 overflow-hidden rounded-lg px-2 text-sm font-medium leading-normal text-white/60 has-[:checked]:bg-violet/20 has-[:checked]:text-violet transition-colors">
+<span class="material-symbols-outlined text-base">lock</span> <span class="truncate">Private</span>
+<input class="invisible w-0" name="privacy" type="radio" value="Private"/>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<p class="text-white font-medium">Choose a color</p>
+<div class="flex items-center gap-3">
+<label><input class="peer hidden" name="color-picker" type="radio" value="#30e8c9"/><div class="h-8 w-8 rounded-full cursor-pointer bg-primary ring-2 ring-offset-2 ring-offset-[#1F2937] ring-transparent peer-checked:ring-primary"></div></label>
+<label><input checked="" class="peer hidden" name="color-picker" type="radio" value="#8B5CF6"/><div class="h-8 w-8 rounded-full cursor-pointer bg-violet ring-2 ring-offset-2 ring-offset-[#1F2937] ring-transparent peer-checked:ring-violet"></div></label>
+<label><input class="peer hidden" name="color-picker" type="radio" value="#F472B6"/><div class="h-8 w-8 rounded-full cursor-pointer bg-[#F472B6] ring-2 ring-offset-2 ring-offset-[#1F2937] ring-transparent peer-checked:ring-[#F472B6]"></div></label>
+<label><input class="peer hidden" name="color-picker" type="radio" value="#FBBF24"/><div class="h-8 w-8 rounded-full cursor-pointer bg-[#FBBF24] ring-2 ring-offset-2 ring-offset-[#1F2937] ring-transparent peer-checked:ring-[#FBBF24]"></div></label>
+<label><input class="peer hidden" name="color-picker" type="radio" value="#60A5FA"/><div class="h-8 w-8 rounded-full cursor-pointer bg-[#60A5FA] ring-2 ring-offset-2 ring-offset-[#1F2937] ring-transparent peer-checked:ring-[#60A5FA]"></div></label>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row-reverse gap-4 pt-8 mt-4 border-t border-white/10">
+<button class="flex w-full sm:w-auto items-center justify-center rounded-xl h-14 px-8 text-base font-bold text-black bg-primary transition-transform hover:scale-105">Save Habit</button>
+<button class="flex w-full sm:w-auto items-center justify-center rounded-xl h-14 px-8 text-base font-bold text-white/80 bg-white/10 hover:bg-white/20">Cancel</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+
+</body></html>

@@ -1,51 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 @import "tailwindcss";
 
 @theme {
-  --color-skyfoam: #f3fafc;
-  --color-midnightslate: #21272e;
-  --color-oakember: #9f764d;
-  --color-oakember-dark: #7e5e3f;
+  --color-primary: #30e8c9;
+  --color-background-dark: #11211e;
+  --color-background-light: #f6f8f8;
+  --color-surface: #1A2C29;
+  --color-muted: #9db8b4;
+  --color-subtle: #293836;
+  --color-secondary: #8B5CF6;
+
+  --font-display: "Inter", sans-serif;
+  --font-landing: "Plus Jakarta Sans", sans-serif;
+  --font-material-symbols: "Material Symbols Outlined";
+
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
 }
 
-:root {
-  --background: #f3fafc;
-  --foreground: #171717;
-}
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply font-display bg-background-light text-[#e0e0e0];
   }
-} */
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  html.dark body {
+    @apply bg-background-dark;
+  }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
   }
 }

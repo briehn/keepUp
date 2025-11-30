@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Log Habit - Momentum</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#30e8c9",
+              "background-light": "#f6f8f8",
+              "background-dark": "#111817",
+              "card-dark": "#293836",
+              "text-muted-dark": "#9db8b4"
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-7xl w-full flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-card-dark/50 px-4 py-3 mb-8">
+<div class="flex items-center gap-4">
+<div class="text-primary w-6 h-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Momentum</h2>
+</div>
+<div class="flex flex-1 justify-end items-center gap-6">
+<div class="hidden md:flex items-center gap-8">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Community</a>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-card-dark text-white hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAIAr4bnt9JDj19Wi9S8kZEkdH-mZ99AXwov6cDTQuR3YbPYtzzXtuWBg9ZH3BCD8_Bc6kzQ1cfWlP8WtCpjyLZHPWHU5gp5aiCh43J51kCiXpz9lqEKaocQ53Ph--3DJfG9RZP5dba1yUkoP8803cynV6BGLO8w7IPymMMOejG3hX1pycMPMuMt-Ag20gUOLI029FOCupzFSscEHodqNn9rZoFoHNYB3v8wHb9NbiwYR8JxA5fpfh4JskYI7jC4jYd2p3QYKLVPxLy");'></div>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<div class="flex flex-wrap justify-between gap-3 p-4 mb-4">
+<div class="flex min-w-72 flex-col gap-3">
+<p class="text-white text-4xl font-black leading-tight tracking-[-0.033em]">Read for 30 Minutes</p>
+<p class="text-text-muted-dark text-base font-normal leading-normal">🔥 14-Day Streak</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 p-4">
+<div class="lg:col-span-2 flex flex-col gap-8">
+<div class="bg-card-dark rounded-xl p-6 @container">
+<div class="flex flex-col items-stretch justify-start">
+<div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-2">
+<p class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">How did it go today?</p>
+<p class="text-text-muted-dark text-base font-normal leading-normal">Log your progress for today. Consistency is key!</p>
+</div>
+<div class="mt-6 flex flex-col gap-6">
+<label class="flex flex-col min-w-40 flex-1">
+<p class="text-white text-base font-medium leading-normal pb-2">Notes &amp; Reflections</p>
+<textarea class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary border-none bg-background-dark focus:border-none min-h-36 placeholder:text-text-muted-dark p-4 text-base font-normal leading-normal" placeholder="Add a note about your progress..."></textarea>
+</label>
+<div class="flex flex-col gap-2">
+<p class="text-white text-base font-medium leading-normal">Attach Photo</p>
+<div class="relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-text-muted-dark/50 rounded-lg bg-background-dark hover:bg-white/5 transition-colors cursor-pointer">
+<div class="text-center">
+<span class="material-symbols-outlined text-text-muted-dark text-4xl">upload_file</span>
+<p class="mt-2 text-sm text-text-muted-dark">Drag &amp; drop or <span class="font-semibold text-primary">browse</span> to upload</p>
+</div>
+<input class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" id="photo-upload" type="file"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full flex items-center justify-center rounded-lg h-12 bg-primary text-background-dark gap-2 text-base font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">check_circle</span>
+                                    Log Habit for Today
+                                </button>
+</div>
+<div class="flex flex-col gap-8">
+<div class="bg-card-dark rounded-xl p-4">
+<div class="flex flex-col">
+<div class="flex items-center p-1 justify-between">
+<button class="hover:bg-white/10 rounded-full transition-colors">
+<div class="text-white flex size-10 items-center justify-center"><span class="material-symbols-outlined" style="font-size: 20px;">chevron_left</span></div>
+</button>
+<p class="text-white text-base font-bold leading-tight flex-1 text-center">October 2024</p>
+<button class="hover:bg-white/10 rounded-full transition-colors">
+<div class="text-white flex size-10 items-center justify-center"><span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span></div>
+</button>
+</div>
+<div class="grid grid-cols-7 gap-1">
+<p class="text-text-muted-dark text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center">S</p>
+<p class="text-text-muted-dark text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center">M</p>
+<p class="text-text-muted-dark text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center">T</p>
+<p class="text-text-muted-dark text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center">W</p>
+<p class="text-text-muted-dark text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center">T</p>
+<p class="text-text-muted-dark text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center">F</p>
+<p class="text-text-muted-dark text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center">S</p>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal col-start-3"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">1</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">2</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">3</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">4</div></button>
+<button class="h-10 w-full text-background-dark text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-primary ring-2 ring-offset-2 ring-offset-card-dark ring-primary">5</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">6</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">7</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">8</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">9</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">10</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">11</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">12</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">13</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-[#8884d8]/50">14</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">15</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">16</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">17</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">18</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">19</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">20</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">21</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">22</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">23</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">24</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">25</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">26</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">27</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">28</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">29</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">30</div></button>
+<button class="h-10 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full hover:bg-white/10 transition-colors">31</div></button>
+</div>
+</div>
+</div>
+<div class="bg-card-dark rounded-xl p-4">
+<h3 class="text-lg font-bold text-white mb-4 px-2">Community Activity</h3>
+<div class="flex flex-col gap-4">
+<div class="flex gap-4 items-start p-2 rounded-lg hover:bg-white/5 transition-colors">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 flex-shrink-0" data-alt="User avatar of Sarah J." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBU3rNarmriFbCAZCuB45WFIgfRg8BGfMRD3TZUfTwi3Ke0Isz2XLtVAMnB9zAJsw-x0JbsRus58lZDHdQR2q9MzpL3CveEusGnTiFhUBmJ6GwZ0UxtASUuJeYWHXPEta7hb-1kJVcV1xVLc_ZsKl5UTz0h2eBxdDmV_aed3UVRCBscix_y6BxC9QOA_x7_Ngu7fvqGHs7BH_aHwUcc60qnPeoi5UKzvbiBtFZTRrb9-JxmUxVnR4HK-aH0-tRn6CgxwjannXO_1hFD");'></div>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-white">Sarah J.</p>
+<p class="text-sm text-text-muted-dark mt-1">Finished 'The Midnight Library'. Such a thought-provoking read! 📖</p>
+</div>
+</div>
+<div class="flex gap-4 items-start p-2 rounded-lg hover:bg-white/5 transition-colors">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 flex-shrink-0" data-alt="User avatar of Mike R." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9yWF7OwyUaRq4_RNMXMscdGfZmNBUuhtW467LNM14RIHJ9IjmUUKJjrhnk3SjmfZKWeQuv5iKJ0u-m8Vj7VAvG04kAqj7D8FpBse30MLVJiCe9aYXRz9Q5ivLg_jzpWqrqDpAliN2gvLrJUTCJGicQiaNK2lHXbdzwfYdKJAD2DFPadcxfMPWzhDRpJ1uit49WdnkLSEuUGlc18WaeyLSnGpLGSEHIVvnkMitkuPuYK96mKecW4d2lKjx6K0WpHTk_uP9Kl4j8z56");'></div>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-white">Mike R.</p>
+<p class="text-sm text-text-muted-dark mt-1">Diving into some classic sci-fi today. Nothing like a good book on a rainy afternoon.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

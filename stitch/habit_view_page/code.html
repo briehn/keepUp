@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Habit Tracker - View Habit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#30e8c9",
+            "background-light": "#f6f8f8",
+            "background-dark": "#11211e",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full">
+<!-- SideNavBar -->
+<aside class="flex flex-col w-64 bg-[#111817] p-4 text-white border-r border-[#3c534f]/50 shrink-0">
+<div class="flex-grow">
+<div class="flex items-center gap-3 mb-8">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAMje0DbOzr74046ejFnSHcppBS0VmKKuy_kf8RtFtXpXNdIQidY1ucVS-RNK2HpVdA87rkZCkv5-0FJZwxx1vZ55-p8XQd7u-me_iPwHl9bfxQBevVkbaYFyxNc895yGhp9ojMApDS0q6p-LwTuUh5RVGPeEoK9Zt6zMVG4-1CRX6vIThrMo-5owHS1IXLfjEKJvPKOhKc3GVbdiFZiHesaJHlHZqM9oUqm23VQaG5-5gO8YN06rx1sHrXxIJcKnO2AMTN_Nw2KEWn");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-medium leading-normal">Alex Doe</h1>
+<p class="text-[#9db8b4] text-sm font-normal leading-normal">alex.doe@example.com</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 text-white hover:bg-[#293836] rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white bg-[#293836] rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">check_circle</span>
+<p class="text-sm font-medium leading-normal">Habits</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white hover:bg-[#293836] rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium leading-normal">Social</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white hover:bg-[#293836] rounded-lg" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="text-sm font-medium leading-normal">Profile</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white hover:bg-[#293836] rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</nav>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-background-dark text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">New Habit</span>
+</button>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-8 overflow-y-auto">
+<div class="max-w-4xl mx-auto">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 mb-4">
+<a class="text-[#9db8b4] text-base font-medium leading-normal" href="#">Habits</a>
+<span class="text-[#9db8b4] text-base font-medium leading-normal">/</span>
+<span class="text-white text-base font-medium leading-normal">Read for 30 Minutes</span>
+</div>
+<!-- PageHeading -->
+<div class="flex flex-wrap items-center justify-between gap-3 mb-8">
+<p class="text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Read for 30 Minutes</p>
+<div class="flex items-center gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#293836] text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Edit Habit</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-transparent border border-red-500/50 text-red-400 hover:bg-red-500/10 text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Delete</span>
+</button>
+</div>
+</div>
+<!-- Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+<div class="flex flex-1 flex-col gap-2 rounded-xl p-6 border border-[#3c534f] bg-[#1a2c29]">
+<p class="text-white text-base font-medium leading-normal">Current Streak</p>
+<p class="text-primary tracking-light text-3xl font-bold leading-tight">15 Days</p>
+</div>
+<div class="flex flex-1 flex-col gap-2 rounded-xl p-6 border border-[#3c534f] bg-[#1a2c29]">
+<p class="text-white text-base font-medium leading-normal">Completion Rate</p>
+<p class="text-white tracking-light text-3xl font-bold leading-tight">92%</p>
+</div>
+<div class="flex flex-1 flex-col gap-2 rounded-xl p-6 border border-[#3c534f] bg-[#1a2c29]">
+<p class="text-white text-base font-medium leading-normal">Total Completions</p>
+<p class="text-white tracking-light text-3xl font-bold leading-tight">128</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-8">
+<!-- Left Column -->
+<div class="col-span-3 lg:col-span-2">
+<!-- SectionHeader: Calendar -->
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">Progress</h2>
+<!-- Calendar Card -->
+<div class="bg-[#1a2c29] border border-[#3c534f] rounded-xl p-6">
+<div class="flex items-center justify-between mb-4">
+<button class="p-2 rounded-md hover:bg-[#293836]">
+<span class="material-symbols-outlined text-[#9db8b4]">chevron_left</span>
+</button>
+<p class="text-white font-semibold">October 2023</p>
+<button class="p-2 rounded-md hover:bg-[#293836]">
+<span class="material-symbols-outlined text-[#9db8b4]">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center text-sm text-[#9db8b4]">
+<span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+</div>
+<div class="grid grid-cols-7 gap-2 mt-2">
+<!-- Example calendar days. In a real app, this would be dynamically generated. -->
+<div class="aspect-square"></div>
+<div class="aspect-square"></div>
+<div class="aspect-square"></div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary/20 text-white">1</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">2</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary/20 text-white">3</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary/20 text-white">4</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary/20 text-white">5</div>
+<div class="flex items-center justify-center aspect-square rounded text-white border border-[#3c534f]">6</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">7</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">8</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">9</div>
+<div class="flex items-center justify-center aspect-square rounded text-white border border-[#3c534f]">10</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">11</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">12</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary/20 text-white">13</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">14</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">15</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">16</div>
+<div class="flex items-center justify-center aspect-square rounded text-white border border-[#3c534f]">17</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">18</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">19</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary/20 text-white">20</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">21</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">22</div>
+<div class="flex items-center justify-center aspect-square rounded text-white border border-[#3c534f]">23</div>
+<div class="flex items-center justify-center aspect-square rounded bg-primary text-background-dark font-bold">24</div>
+<div class="flex items-center justify-center aspect-square rounded text-white">25</div>
+<div class="flex items-center justify-center aspect-square rounded text-white">26</div>
+<div class="flex items-center justify-center aspect-square rounded text-white">27</div>
+<div class="flex items-center justify-center aspect-square rounded text-white">28</div>
+<div class="flex items-center justify-center aspect-square rounded text-white">29</div>
+<div class="flex items-center justify-center aspect-square rounded text-white">30</div>
+<div class="flex items-center justify-center aspect-square rounded text-white">31</div>
+</div>
+</div>
+<!-- SectionHeader: Notes -->
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] mt-8 mb-4">Notes</h2>
+<!-- Notes Section -->
+<div class="space-y-4">
+<div class="bg-[#1a2c29] border border-[#3c534f] rounded-xl p-4">
+<p class="text-sm text-[#9db8b4] mb-1">October 24, 2023</p>
+<p class="text-white">Finished 'The Midnight Library'. It was an insightful read, especially the parts about regret and choices. Feeling accomplished.</p>
+</div>
+<div class="bg-[#1a2c29] border border-[#3c534f] rounded-xl p-4">
+<p class="text-sm text-[#9db8b4] mb-1">October 22, 2023</p>
+<p class="text-white">Struggled to focus today but pushed through the 30 minutes. Reading non-fiction is a bit tougher but rewarding.</p>
+</div>
+<button class="w-full flex items-center justify-center gap-2 h-12 text-center text-primary font-semibold border-2 border-dashed border-primary/30 rounded-lg hover:bg-primary/10">
+<span class="material-symbols-outlined">add</span>
+                Add a new note
+              </button>
+</div>
+</div>
+<!-- Right Column / Details Card -->
+<div class="col-span-3 lg:col-span-1">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">Details</h2>
+<div class="bg-[#1a2c29] border border-[#3c534f] rounded-xl p-6 space-y-5">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">event_repeat</span>
+<div>
+<p class="text-white font-medium">Frequency</p>
+<p class="text-[#9db8b4]">Daily</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">notifications</span>
+<div>
+<p class="text-white font-medium">Reminder</p>
+<p class="text-[#9db8b4]">9:00 PM</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">visibility</span>
+<div>
+<p class="text-white font-medium">Privacy</p>
+<p class="text-[#9db8b4]">Public</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">calendar_today</span>
+<div>
+<p class="text-white font-medium">Start Date</p>
+<p class="text-[#9db8b4]">August 1, 2023</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
