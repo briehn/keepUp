@@ -98,8 +98,8 @@ const SignInPage: NextPage = () => {
                   </button>
                 </div>
                 <div className="mt-1 text-right text-xs">
-                  <a href="#" className="text-[#30e8c9] hover:underline">
-                    Forgot Password?
+                  <a href="#" className="text-[#30e8c9] cursor-not-allowed">
+                    Forgot Password? (Disabled)
                   </a>
                 </div>
               </div>
@@ -114,7 +114,7 @@ const SignInPage: NextPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-2 flex h-11 w-full items-center justify-center rounded-md bg-[#30e8c9] text-sm font-semibold text-[#04201c] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+                className="cursor-pointer mt-2 flex h-11 w-full items-center justify-center rounded-md bg-[#30e8c9] text-sm font-semibold text-[#04201c] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {loading ? "Logging in..." : "Log In"}
               </button>
