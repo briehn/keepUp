@@ -35,13 +35,13 @@ export default function SideBar({ user }: SideBarProps) {
         {/* Top half */}
         <div className="flex flex-col gap-8">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link href="/dashboard" className="inline-flex items-center gap-2">
             <UserGroupIcon
               className="h-6 w-6 text-primary"
               aria-hidden="true"
             />
             <h1 className="text-xl font-bold text-white">KeepUp</h1>
-          </div>
+          </Link>
 
           <div className="flex flex-col gap-4">
             {/* User info */}
@@ -93,7 +93,7 @@ export default function SideBar({ user }: SideBarProps) {
         {/* Bottom half */}
         <div className="flex flex-col gap-3">
           <Link
-            href="/habit/add"
+            href="/habits/new"
             className="flex h-10 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold leading-normal tracking-[0.015em] text-background-dark transition-colors hover:bg-primary/90"
           >
             <span className="truncate">Add New Habit</span>
